@@ -1,10 +1,10 @@
 package com.hibernate.cinema.dao.impl;
 
-import java.util.List;
 import com.hibernate.cinema.dao.MovieDao;
 import com.hibernate.cinema.lib.Dao;
 import com.hibernate.cinema.model.Movie;
 import com.hibernate.cinema.util.HibernateUtil;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
