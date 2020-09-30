@@ -1,6 +1,7 @@
 package com.hibernate.cinema.dao.impl;
 
 import com.hibernate.cinema.dao.MovieDao;
+import com.hibernate.cinema.exception.DataProcessingException;
 import com.hibernate.cinema.lib.Dao;
 import com.hibernate.cinema.model.Movie;
 import com.hibernate.cinema.util.HibernateUtil;
@@ -26,7 +27,7 @@ public class MovieDaoImpl implements MovieDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new RuntimeException("Can't insert Movie entity", e);
+            throw new DataProcessingException("Can't insert Movie entity", e);
         } finally {
             if (session != null) {
                 session.close();
