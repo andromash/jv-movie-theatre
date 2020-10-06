@@ -2,14 +2,19 @@ package com.hibernate.cinema.dao.impl;
 
 import com.hibernate.cinema.dao.MovieSessionDao;
 import com.hibernate.cinema.exception.DataProcessingException;
+import com.hibernate.cinema.lib.Dao;
+import com.hibernate.cinema.model.Movie;
 import com.hibernate.cinema.model.MovieSession;
 import com.hibernate.cinema.util.HibernateUtil;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import java.util.List;
-
+@Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
     @Override
     public MovieSession add(MovieSession movieSession) {
@@ -35,13 +40,21 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
     }
 
     @Override
-    public List<MovieSession> getAll() {
+    public List<MovieSession> getAvailable(Movie movie, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            Query<MovieSession> getAllMovieSessionsQuery =
-                    session.createQuery("from MovieSession", MovieSession.class);
-            return getAllMovieSessionsQuery.getResultList();
+            Query<MovieSession> getAllAvailableSessionsQuery =
+                    session.createQuery("from MovieSession where movie = :movie "
+                                    + "and showTime between :start AND :end",
+                            MovieSession.class);
+            LocalDateTime start = date.atStartOfDay();
+            LocalDateTime end = date.atTime(LocalTime.MAX);
+            getAllAvailableSessionsQuery.setParameter("movie", movie);
+            getAllAvailableSessionsQuery.setParameter("start", start);
+            getAllAvailableSessionsQuery.setParameter("end", end);
+            return getAllAvailableSessionsQuery.getResultList();
         } catch (Exception e) {
             throw new DataProcessingException("Couldn't get movie sessions from DB", e);
         }
     }
 }
+

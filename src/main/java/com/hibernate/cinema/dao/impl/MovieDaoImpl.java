@@ -35,6 +35,18 @@ public class MovieDaoImpl implements MovieDao {
     }
 
     @Override
+    public Movie get(Long id) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Query<Movie> getMovieByIdQuery = session.createQuery("from Movie "
+                    + "where id = :id", Movie.class);
+            getMovieByIdQuery.setParameter("id", id);
+            return getMovieByIdQuery.getSingleResult();
+        } catch (Exception e) {
+            throw new DataProcessingException("Couldn't get movie from DB with id = " + id, e);
+        }
+    }
+
+    @Override
     public List<Movie> getAll() {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Movie> getAllMoviesQuery = session.createQuery("from Movie", Movie.class);
