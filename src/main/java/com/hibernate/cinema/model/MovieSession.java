@@ -16,7 +16,7 @@ public class MovieSession {
     private Long id;
     @ManyToOne
     private Movie movie;
-    @ ManyToOne
+    @ManyToOne
     private CinemaHall cinemaHall;
     private LocalDateTime showTime;
 
