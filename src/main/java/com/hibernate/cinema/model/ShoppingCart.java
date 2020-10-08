@@ -1,7 +1,6 @@
 package com.hibernate.cinema.model;
 
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,9 +15,9 @@ public class ShoppingCart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany
     private List<Ticket> tickets;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne
     private User user;
 
     public Long getId() {
