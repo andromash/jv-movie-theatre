@@ -1,9 +1,12 @@
 package com.hibernate.cinema;
 
+import com.hibernate.cinema.exception.AuthenticationException;
 import com.hibernate.cinema.lib.Injector;
 import com.hibernate.cinema.model.CinemaHall;
 import com.hibernate.cinema.model.Movie;
 import com.hibernate.cinema.model.MovieSession;
+import com.hibernate.cinema.model.User;
+import com.hibernate.cinema.service.AuthenticationService;
 import com.hibernate.cinema.service.CinemaHallService;
 import com.hibernate.cinema.service.MovieService;
 import com.hibernate.cinema.service.MovieSessionService;
@@ -37,5 +40,26 @@ public class Main {
         movieSessionService.add(movieSession);
         movieSessionService.findAvailableSessions(movie.getId(),
                 LocalDate.now()).forEach(System.out::println);
+
+        AuthenticationService authenticationService
+                = (AuthenticationService) injector.getInstance(AuthenticationService.class);
+        User andrii = authenticationService
+                .register("andriiromash@gmail.com", "abrakadabra");
+        User bob = authenticationService
+                .register("bobinpop@gmail.com", "bobbystrawbby");
+        try {
+            authenticationService
+                    .register(andrii.getEmail(), "testPassword");
+        } catch (Exception e) {
+            //I know this is not okay to do this.
+            //It was created only to show that everything works fine
+            System.out.println(e);
+        }
+        try {
+            authenticationService.login(andrii.getEmail(), andrii.getPassword());
+            authenticationService.login(bob.getEmail(), "wrongpassword");
+        } catch (AuthenticationException e) {
+            throw new RuntimeException("Login failed: ", e);
+        }
     }
 }
