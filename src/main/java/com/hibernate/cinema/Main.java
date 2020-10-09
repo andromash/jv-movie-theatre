@@ -12,7 +12,6 @@ import com.hibernate.cinema.service.MovieSessionService;
 import com.hibernate.cinema.service.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 public class Main {
     private static Injector injector = Injector.getInstance("com.hibernate.cinema");
