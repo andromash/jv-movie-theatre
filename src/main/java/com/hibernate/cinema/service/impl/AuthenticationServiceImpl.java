@@ -5,6 +5,7 @@ import com.hibernate.cinema.lib.Inject;
 import com.hibernate.cinema.lib.Service;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.AuthenticationService;
+import com.hibernate.cinema.service.ShoppingCartService;
 import com.hibernate.cinema.service.UserService;
 import com.hibernate.cinema.util.HashUtil;
 import java.util.Optional;
@@ -13,6 +14,8 @@ import java.util.Optional;
 public class AuthenticationServiceImpl implements AuthenticationService {
     @Inject
     private UserService userService;
+    @Inject
+    private ShoppingCartService shoppingCartService;
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
@@ -28,7 +31,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
-        return userService.add(user);
+        user = userService.add(user);
+        shoppingCartService.registerNewShoppingCart(user);
+        return user;
     }
 
     private boolean isPasswordNotValid(String password, User userFromDB) {
