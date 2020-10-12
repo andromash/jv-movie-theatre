@@ -39,7 +39,6 @@ public class OrderDaoImpl implements OrderDao {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from Order o "
                     + "left join fetch o.tickets "
-                    + "join fetch o.user "
                     + "where o.user = :user", Order.class)
                     .setParameter("user", user)
                     .getResultList();
