@@ -20,6 +20,7 @@
         <mapping class="com.hibernate.cinema.model.User"/>
         <mapping class="com.hibernate.cinema.model.ShoppingCart"/>
         <mapping class="com.hibernate.cinema.model.Ticket"/>
+        <mapping class="com.hibernate.cinema.model.Order"/>
     </session-factory>
 
 </hibernate-configuration>

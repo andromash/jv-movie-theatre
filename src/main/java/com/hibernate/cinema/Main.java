@@ -4,11 +4,13 @@ import com.hibernate.cinema.lib.Injector;
 import com.hibernate.cinema.model.CinemaHall;
 import com.hibernate.cinema.model.Movie;
 import com.hibernate.cinema.model.MovieSession;
+import com.hibernate.cinema.model.ShoppingCart;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.AuthenticationService;
 import com.hibernate.cinema.service.CinemaHallService;
 import com.hibernate.cinema.service.MovieService;
 import com.hibernate.cinema.service.MovieSessionService;
+import com.hibernate.cinema.service.OrderService;
 import com.hibernate.cinema.service.ShoppingCartService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -50,5 +52,10 @@ public class Main {
                 = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         shoppingCartService.addSession(movieSession, andrii);
         shoppingCartService.addSession(movieSession, andrii);
+
+        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
+        ShoppingCart shoppingCart = shoppingCartService.getByUser(andrii);
+        orderService.completeOrder(shoppingCart.getTickets(), andrii);
+        orderService.getOrderHistory(andrii).forEach(System.out::println);
     }
 }
