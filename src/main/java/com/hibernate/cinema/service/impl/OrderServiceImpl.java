@@ -9,6 +9,7 @@ import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.OrderService;
 import com.hibernate.cinema.service.ShoppingCartService;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +22,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order completeOrder(List<Ticket> tickets, User user) {
         Order order = new Order();
-        order.setTickets(tickets);
+        order.setTickets(new ArrayList<>(tickets));
         order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
         shoppingCartService.clear(shoppingCartService.getByUser(user));
