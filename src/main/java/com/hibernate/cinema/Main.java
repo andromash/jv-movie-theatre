@@ -21,23 +21,20 @@ public class Main {
     private static final Logger logger = Logger.getLogger(Main.class);
 
     public static void main(String[] args) {
-        logger.info("Creating new movie");
         Movie movie = new Movie();
         movie.setTitle("Fast and Furious");
         MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
         movie = movieService.add(movie);
-        movieService.getAll().forEach(logger::debug);
+        movieService.getAll().forEach(logger::info);
 
-        logger.info("Creating cinema hall");
         CinemaHall imax = new CinemaHall();
         imax.setCapacity(280);
         imax.setDescription("IMAX");
         CinemaHallService cinemaHallService =
                 (CinemaHallService) injector.getInstance(CinemaHallService.class);
         imax = cinemaHallService.add(imax);
-        cinemaHallService.getAll().forEach(logger::debug);
+        cinemaHallService.getAll().forEach(logger::info);
 
-        logger.info("Creating movie session");
         MovieSession movieSession = new MovieSession();
         movieSession.setCinemaHall(imax);
         movieSession.setMovie(movie);
@@ -46,24 +43,21 @@ public class Main {
                 (MovieSessionService) injector.getInstance(MovieSessionService.class);
         movieSessionService.add(movieSession);
         movieSessionService.findAvailableSessions(movie.getId(),
-                LocalDate.now()).forEach(logger::debug);
+                LocalDate.now()).forEach(logger::info);
 
-        logger.info("Registration of user");
         AuthenticationService authenticationService
                 = (AuthenticationService) injector.getInstance(AuthenticationService.class);
         User andrii = authenticationService
                 .register("andriiromash@gmail.com", "abrakadabra");
 
-        logger.info("Adding session to shopping cart");
         ShoppingCartService shoppingCartService
                 = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         shoppingCartService.addSession(movieSession, andrii);
         shoppingCartService.addSession(movieSession, andrii);
 
-        logger.info("Creating order");
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
         ShoppingCart shoppingCart = shoppingCartService.getByUser(andrii);
         orderService.completeOrder(shoppingCart.getTickets(), andrii);
-        orderService.getOrderHistory(andrii).forEach(logger::debug);
+        orderService.getOrderHistory(andrii).forEach(logger::info);
     }
 }
