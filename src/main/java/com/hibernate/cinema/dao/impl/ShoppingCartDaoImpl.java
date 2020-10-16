@@ -6,13 +6,17 @@ import com.hibernate.cinema.lib.Dao;
 import com.hibernate.cinema.model.ShoppingCart;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.util.HibernateUtil;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 @Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
+    private static final Logger logger = Logger.getLogger(ShoppingCartDaoImpl.class);
+
     @Override
     public ShoppingCart add(ShoppingCart shoppingCart) {
+        logger.info("Trying to add shopping cart");
         Transaction transaction = null;
         Session session = null;
         try {
@@ -20,6 +24,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
             transaction = session.beginTransaction();
             session.save(shoppingCart);
             transaction.commit();
+            logger.info("Shopping cart successfully created: " + shoppingCart);
             return shoppingCart;
         } catch (Exception e) {
             if (transaction != null) {
@@ -36,6 +41,7 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public ShoppingCart getByUser(User user) {
+        logger.info("Trying to get shopping cart of user: " + user);
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             return session.createQuery("from ShoppingCart sc "
                     + "left join fetch sc.tickets "
@@ -50,12 +56,14 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
 
     @Override
     public void update(ShoppingCart shoppingCart) {
+        logger.info("Trying to update shopping cart: " + shoppingCart);
         Transaction transaction = null;
         Session session = null;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             session.update(shoppingCart);
+            logger.info("Shopping cart successfully updated");
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
