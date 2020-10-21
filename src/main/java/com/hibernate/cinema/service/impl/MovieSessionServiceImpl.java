@@ -2,9 +2,9 @@ package com.hibernate.cinema.service.impl;
 
 import com.hibernate.cinema.dao.MovieSessionDao;
 import com.hibernate.cinema.model.MovieSession;
+import com.hibernate.cinema.service.MovieSessionService;
 import java.time.LocalDate;
 import java.util.List;
-import com.hibernate.cinema.service.MovieSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

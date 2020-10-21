@@ -3,7 +3,6 @@ package com.hibernate.cinema.dao.impl;
 import com.hibernate.cinema.dao.UserDao;
 import com.hibernate.cinema.exception.DataProcessingException;
 import com.hibernate.cinema.model.User;
-
 import java.util.Optional;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
