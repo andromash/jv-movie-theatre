@@ -2,18 +2,25 @@ package com.hibernate.cinema.dao.impl;
 
 import com.hibernate.cinema.dao.MovieDao;
 import com.hibernate.cinema.exception.DataProcessingException;
-import com.hibernate.cinema.lib.Dao;
 import com.hibernate.cinema.model.Movie;
-import com.hibernate.cinema.util.HibernateUtil;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class MovieDaoImpl implements MovieDao {
     private static final Logger logger = Logger.getLogger(MovieDaoImpl.class);
+    private final SessionFactory sessionFactory;
+
+    @Autowired
+    public MovieDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public Movie add(Movie movie) {
@@ -21,7 +28,7 @@ public class MovieDaoImpl implements MovieDao {
         Transaction transaction = null;
         Session session = null;
         try {
-            session = HibernateUtil.getSessionFactory().openSession();
+            session = sessionFactory.openSession();
             transaction = session.beginTransaction();
             session.save(movie);
             transaction.commit();
@@ -42,7 +49,7 @@ public class MovieDaoImpl implements MovieDao {
     @Override
     public List<Movie> getAll() {
         logger.info("Trying to get all movies");
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        try (Session session = sessionFactory.openSession()) {
             Query<Movie> getAllMoviesQuery = session.createQuery("from Movie", Movie.class);
             return getAllMoviesQuery.getResultList();
         } catch (Exception e) {
