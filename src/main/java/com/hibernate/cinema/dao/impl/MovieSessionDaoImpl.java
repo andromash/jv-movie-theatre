@@ -2,7 +2,6 @@ package com.hibernate.cinema.dao.impl;
 
 import com.hibernate.cinema.dao.MovieSessionDao;
 import com.hibernate.cinema.exception.DataProcessingException;
-import com.hibernate.cinema.lib.Dao;
 import com.hibernate.cinema.model.MovieSession;
 import com.hibernate.cinema.util.HibernateUtil;
 import java.time.LocalDate;
@@ -12,8 +11,9 @@ import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class MovieSessionDaoImpl implements MovieSessionDao {
     private static final Logger logger = Logger.getLogger(MovieSessionDaoImpl.class);
 

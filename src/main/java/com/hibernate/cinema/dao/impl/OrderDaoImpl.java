@@ -2,7 +2,6 @@ package com.hibernate.cinema.dao.impl;
 
 import com.hibernate.cinema.dao.OrderDao;
 import com.hibernate.cinema.exception.DataProcessingException;
-import com.hibernate.cinema.lib.Dao;
 import com.hibernate.cinema.model.Order;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.util.HibernateUtil;
@@ -10,8 +9,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
-@Dao
+@Repository
 public class OrderDaoImpl implements OrderDao {
     private static final Logger logger = Logger.getLogger(OrderDaoImpl.class);
 
