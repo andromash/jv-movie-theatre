@@ -1,6 +1,7 @@
 package com.hibernate.cinema.config;
 
-import com.hibernate.cinema.model.User;
+import java.util.Properties;
+import javax.sql.DataSource;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import javax.sql.DataSource;
-import java.util.Properties;
 
 @Configuration
 @PropertySource("classpath:db.properties")
@@ -45,7 +44,7 @@ public class AppConfig {
         properties.put("hibernate.format_sql", environment.getProperty("hibernate.format_sql"));
         properties.put("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
         factoryBean.setHibernateProperties(properties);
-        factoryBean.setAnnotatedClasses(User.class);
+        factoryBean.setPackagesToScan("com.hibernate.cinema.model");
         return factoryBean;
     }
 }
