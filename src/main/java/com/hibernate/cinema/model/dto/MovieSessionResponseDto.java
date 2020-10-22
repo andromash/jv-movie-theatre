@@ -1,6 +1,5 @@
 package com.hibernate.cinema.model.dto;
 
-
 public class MovieSessionResponseDto {
     private Long movieSessionId;
     private Long movie;

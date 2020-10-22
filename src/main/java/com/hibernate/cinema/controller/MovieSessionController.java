@@ -25,7 +25,8 @@ public class MovieSessionController {
     private final MovieService movieService;
 
     @Autowired
-    public MovieSessionController(MovieSessionService movieSessionService, MovieService movieService) {
+    public MovieSessionController(MovieSessionService movieSessionService,
+                                  MovieService movieService) {
         this.movieSessionService = movieSessionService;
         this.movieService = movieService;
     }
@@ -37,7 +38,7 @@ public class MovieSessionController {
 
     @GetMapping("/available")
     public List<MovieSessionResponseDto> getAvailable(@RequestParam Long movieId,
-                                                      @RequestParam LocalDate date){
+                                                      @RequestParam LocalDate date) {
         return movieSessionService.findAvailableSessions(movieId, date).stream()
                 .map(this::castMovieSessionToDto)
                 .collect(Collectors.toList());

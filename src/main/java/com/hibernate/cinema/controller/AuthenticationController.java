@@ -1,6 +1,5 @@
 package com.hibernate.cinema.controller;
 
-import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.model.dto.UserRequestDto;
 import com.hibernate.cinema.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +16,8 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-
     @PostMapping("/register")
     public void signUp(@RequestBody UserRequestDto userRequestDto) {
         authenticationService.register(userRequestDto.getEmail(), userRequestDto.getPassword());
-    }
-
-    private User castDtoToUser(UserRequestDto userRequestDto) {
-        User user = new User();
-        user.setPassword(userRequestDto.getPassword());
-        user.setEmail(userRequestDto.getEmail());
-        return user;
     }
 }
