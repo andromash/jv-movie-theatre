@@ -1,13 +1,11 @@
 package com.hibernate.cinema.controller;
 
-import com.hibernate.cinema.model.Movie;
 import com.hibernate.cinema.model.dto.MovieRequestDto;
 import com.hibernate.cinema.model.dto.MovieResponseDto;
 import com.hibernate.cinema.service.MovieService;
+import com.hibernate.cinema.service.mapper.MovieMapper;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.hibernate.cinema.service.mapper.MovieMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

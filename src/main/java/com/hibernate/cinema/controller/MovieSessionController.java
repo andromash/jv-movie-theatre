@@ -1,18 +1,12 @@
 package com.hibernate.cinema.controller;
 
-import com.hibernate.cinema.model.MovieSession;
 import com.hibernate.cinema.model.dto.MovieSessionRequestDto;
 import com.hibernate.cinema.model.dto.MovieSessionResponseDto;
-import com.hibernate.cinema.service.CinemaHallService;
-import com.hibernate.cinema.service.MovieService;
 import com.hibernate.cinema.service.MovieSessionService;
+import com.hibernate.cinema.service.mapper.MovieSessionMapper;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import com.hibernate.cinema.service.mapper.MovieSessionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +22,8 @@ public class MovieSessionController {
     private final MovieSessionMapper movieSessionMapper;
 
     @Autowired
-    public MovieSessionController(MovieSessionService movieSessionService, MovieSessionMapper movieSessionMapper) {
+    public MovieSessionController(MovieSessionService movieSessionService,
+                                  MovieSessionMapper movieSessionMapper) {
         this.movieSessionService = movieSessionService;
         this.movieSessionMapper = movieSessionMapper;
     }

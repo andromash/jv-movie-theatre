@@ -5,11 +5,10 @@ import com.hibernate.cinema.model.dto.MovieSessionRequestDto;
 import com.hibernate.cinema.model.dto.MovieSessionResponseDto;
 import com.hibernate.cinema.service.CinemaHallService;
 import com.hibernate.cinema.service.MovieService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Component
 public class MovieSessionMapper {
