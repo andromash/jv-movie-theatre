@@ -3,6 +3,7 @@ package com.hibernate.cinema.controller;
 import com.hibernate.cinema.model.MovieSession;
 import com.hibernate.cinema.model.dto.MovieSessionRequestDto;
 import com.hibernate.cinema.model.dto.MovieSessionResponseDto;
+import com.hibernate.cinema.service.CinemaHallService;
 import com.hibernate.cinema.service.MovieService;
 import com.hibernate.cinema.service.MovieSessionService;
 import java.time.LocalDate;
@@ -23,12 +24,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
     private final MovieService movieService;
+    private final CinemaHallService cinemaHallService;
 
     @Autowired
     public MovieSessionController(MovieSessionService movieSessionService,
-                                  MovieService movieService) {
+                                  MovieService movieService,
+                                  CinemaHallService cinemaHallService) {
         this.movieSessionService = movieSessionService;
         this.movieService = movieService;
+        this.cinemaHallService = cinemaHallService;
     }
 
     @PostMapping
@@ -47,9 +51,9 @@ public class MovieSessionController {
     private MovieSession castDtoToMovieSession(MovieSessionRequestDto movieSessionDto) {
         MovieSession movieSession = new MovieSession();
         movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
-                DateTimeFormatter.ofPattern("d/MM/yyyy")));
+                DateTimeFormatter.ofPattern("d-MM-yyyy hh:mm:ss a")));
         movieSession.setMovie(movieService.getById(movieSessionDto.getMovieId()));
-        movieSession.setCinemaHall(movieSession.getCinemaHall());
+        movieSession.setCinemaHall(cinemaHallService.getById(movieSessionDto.getCinemaHallId()));
         return movieSession;
     }
 
