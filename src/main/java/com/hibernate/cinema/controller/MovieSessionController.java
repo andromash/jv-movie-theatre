@@ -5,6 +5,7 @@ import com.hibernate.cinema.model.dto.MovieSessionResponseDto;
 import com.hibernate.cinema.service.MovieSessionService;
 import com.hibernate.cinema.service.mapper.MovieSessionMapper;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
+    private static final String DATE_FORMAT = "d-MM-yyyy";
     private final MovieSessionService movieSessionService;
     private final MovieSessionMapper movieSessionMapper;
 
@@ -35,8 +37,9 @@ public class MovieSessionController {
 
     @GetMapping("/available")
     public List<MovieSessionResponseDto> getAvailable(@RequestParam Long movieId,
-                                                      @RequestParam LocalDate date) {
-        return movieSessionService.findAvailableSessions(movieId, date).stream()
+                                                      @RequestParam String date) {
+        return movieSessionService.findAvailableSessions(movieId,
+                LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT))).stream()
                 .map(movieSessionMapper::castMovieSessionToDto)
                 .collect(Collectors.toList());
     }
