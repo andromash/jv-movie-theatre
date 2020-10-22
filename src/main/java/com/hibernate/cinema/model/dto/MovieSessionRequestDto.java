@@ -1,35 +1,31 @@
 package com.hibernate.cinema.model.dto;
 
-import com.hibernate.cinema.model.CinemaHall;
-import com.hibernate.cinema.model.Movie;
-import java.time.LocalDateTime;
-
 public class MovieSessionRequestDto {
-    private Movie movie;
-    private CinemaHall cinemaHall;
-    private LocalDateTime showTime;
+    private Long movieId;
+    private Long cinemaHallId;
+    private String showTime;
 
-    public Movie getMovie() {
-        return movie;
+    public Long getMovieId() {
+        return movieId;
     }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
+    public void setMovieId(Long movieId) {
+        this.movieId = movieId;
     }
 
-    public CinemaHall getCinemaHall() {
-        return cinemaHall;
+    public Long getCinemaHallId() {
+        return cinemaHallId;
     }
 
-    public void setCinemaHall(CinemaHall cinemaHall) {
-        this.cinemaHall = cinemaHall;
+    public void setCinemaHallId(Long cinemaHallId) {
+        this.cinemaHallId = cinemaHallId;
     }
 
-    public LocalDateTime getShowTime() {
+    public String getShowTime() {
         return showTime;
     }
 
-    public void setShowTime(LocalDateTime showTime) {
+    public void setShowTime(String showTime) {
         this.showTime = showTime;
     }
 }

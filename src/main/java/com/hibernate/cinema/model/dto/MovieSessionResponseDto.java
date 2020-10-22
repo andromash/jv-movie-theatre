@@ -3,7 +3,7 @@ package com.hibernate.cinema.model.dto;
 
 public class MovieSessionResponseDto {
     private Long movieSessionId;
-    private String movie;
+    private Long movie;
     private Long cinemaHall;
     private String showTime;
 
@@ -15,11 +15,11 @@ public class MovieSessionResponseDto {
         this.movieSessionId = movieSessionId;
     }
 
-    public String getMovie() {
+    public Long getMovie() {
         return movie;
     }
 
-    public void setMovie(String movie) {
+    public void setMovie(Long movie) {
         this.movie = movie;
     }
 

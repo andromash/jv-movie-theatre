@@ -3,8 +3,11 @@ package com.hibernate.cinema.controller;
 import com.hibernate.cinema.model.MovieSession;
 import com.hibernate.cinema.model.dto.MovieSessionRequestDto;
 import com.hibernate.cinema.model.dto.MovieSessionResponseDto;
+import com.hibernate.cinema.service.MovieService;
 import com.hibernate.cinema.service.MovieSessionService;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/movie-sessions")
 public class MovieSessionController {
     private final MovieSessionService movieSessionService;
+    private final MovieService movieService;
 
     @Autowired
-    public MovieSessionController(MovieSessionService movieSessionService) {
+    public MovieSessionController(MovieSessionService movieSessionService, MovieService movieService) {
         this.movieSessionService = movieSessionService;
+        this.movieService = movieService;
     }
 
     @PostMapping
@@ -40,8 +45,9 @@ public class MovieSessionController {
 
     private MovieSession castDtoToMovieSession(MovieSessionRequestDto movieSessionDto) {
         MovieSession movieSession = new MovieSession();
-        movieSession.setShowTime(movieSessionDto.getShowTime());
-        movieSession.setMovie(movieSessionDto.getMovie());
+        movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
+                DateTimeFormatter.ofPattern("d/MM/yyyy")));
+        movieSession.setMovie(movieService.getById(movieSessionDto.getMovieId()));
         movieSession.setCinemaHall(movieSession.getCinemaHall());
         return movieSession;
     }
@@ -49,7 +55,7 @@ public class MovieSessionController {
     private MovieSessionResponseDto castMovieSessionToDto(MovieSession movieSession) {
         MovieSessionResponseDto movieSessionResponseDto = new MovieSessionResponseDto();
         movieSessionResponseDto.setCinemaHall(movieSession.getCinemaHall().getId());
-        movieSessionResponseDto.setMovie(movieSession.getMovie().getTitle());
+        movieSessionResponseDto.setMovie(movieSession.getMovie().getId());
         movieSessionResponseDto.setShowTime(movieSession.getShowTime().toString());
         return movieSessionResponseDto;
     }

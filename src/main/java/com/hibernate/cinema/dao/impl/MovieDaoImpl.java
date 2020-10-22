@@ -56,4 +56,12 @@ public class MovieDaoImpl implements MovieDao {
             throw new DataProcessingException("Couldn't get movies from DB", e);
         }
     }
+
+    @Override
+    public Movie getById(Long id) {
+        logger.info("Trying to get movie with id = " + id);
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Movie.class, id);
+        }
+    }
 }
