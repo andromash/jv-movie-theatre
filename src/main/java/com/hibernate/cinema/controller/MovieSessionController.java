@@ -5,7 +5,6 @@ import com.hibernate.cinema.model.dto.MovieSessionResponseDto;
 import com.hibernate.cinema.service.MovieSessionService;
 import com.hibernate.cinema.service.mapper.MovieSessionMapper;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
