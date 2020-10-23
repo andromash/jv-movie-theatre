@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,9 +38,10 @@ public class MovieSessionController {
 
     @GetMapping("/available")
     public List<MovieSessionResponseDto> getAvailable(@RequestParam Long movieId,
-                                                      @RequestParam String date) {
-        return movieSessionService.findAvailableSessions(movieId,
-                LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT))).stream()
+                                                      @RequestParam
+                                                      @DateTimeFormat(pattern = DATE_FORMAT)
+                                                              LocalDate date) {
+        return movieSessionService.findAvailableSessions(movieId, date).stream()
                 .map(movieSessionMapper::castMovieSessionToDto)
                 .collect(Collectors.toList());
     }

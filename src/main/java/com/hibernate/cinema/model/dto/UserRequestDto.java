@@ -3,15 +3,6 @@ package com.hibernate.cinema.model.dto;
 public class UserRequestDto {
     private String email;
     private String password;
-    private String passwordRepeated;
-
-    public String getPasswordRepeated() {
-        return passwordRepeated;
-    }
-
-    public void setPasswordRepeated(String passwordRepeated) {
-        this.passwordRepeated = passwordRepeated;
-    }
 
     public String getEmail() {
         return email;
