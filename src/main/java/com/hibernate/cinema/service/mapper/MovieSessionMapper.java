@@ -28,6 +28,7 @@ public class MovieSessionMapper {
                 DateTimeFormatter.ofPattern(DATETIME_PATTERN)));
         movieSession.setMovie(movieService.getById(movieSessionDto.getMovieId()));
         movieSession.setCinemaHall(cinemaHallService.getById(movieSessionDto.getCinemaHallId()));
+        movieSession.setId(movieSessionDto.getId());
         return movieSession;
     }
 
