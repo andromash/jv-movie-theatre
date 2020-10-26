@@ -8,7 +8,6 @@ import com.hibernate.cinema.service.UserService;
 import com.hibernate.cinema.service.mapper.OrderMapper;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +25,8 @@ public class OrderController {
     private final OrderMapper orderMapper;
 
     @Autowired
-    public OrderController(OrderService orderService, OrderMapper orderMapper, UserService userService, ShoppingCartService shoppingCartService) {
+    public OrderController(OrderService orderService, OrderMapper orderMapper,
+                           UserService userService, ShoppingCartService shoppingCartService) {
         this.orderService = orderService;
         this.orderMapper = orderMapper;
         this.userService = userService;

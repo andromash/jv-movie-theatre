@@ -21,7 +21,8 @@ public class ShoppingCartController {
     private final MovieSessionMapper movieSessionMapper;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartService shoppingCartService, UserService userService, MovieSessionMapper movieSessionMapper) {
+    public ShoppingCartController(ShoppingCartService shoppingCartService,
+                                  UserService userService, MovieSessionMapper movieSessionMapper) {
         this.shoppingCartService = shoppingCartService;
         this.userService = userService;
         this.movieSessionMapper = movieSessionMapper;
