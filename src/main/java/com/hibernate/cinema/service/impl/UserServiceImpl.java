@@ -4,7 +4,6 @@ import com.hibernate.cinema.dao.UserDao;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.UserService;
 import com.hibernate.cinema.util.HashUtil;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        return userDao.findByEmail(email);
+    public User findByEmail(String email) {
+        return userDao.findByEmail(email).get();
     }
 }
