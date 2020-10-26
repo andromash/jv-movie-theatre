@@ -34,7 +34,7 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public void completeOrder(@RequestBody String email) {
+    public void completeOrder(@RequestParam String email) {
         ShoppingCart shoppingCart = shoppingCartService
                 .getByUser(userService.findByEmail(email));
         orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
