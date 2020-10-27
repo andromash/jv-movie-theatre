@@ -1,23 +1,23 @@
 package com.hibernate.cinema.model.dto;
 
 public class CinemaHallResponseDto {
-    private long id;
-    private int capacity;
+    private Long id;
+    private Integer capacity;
     private String description;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 

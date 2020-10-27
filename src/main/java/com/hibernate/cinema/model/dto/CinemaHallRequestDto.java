@@ -1,14 +1,14 @@
 package com.hibernate.cinema.model.dto;
 
 public class CinemaHallRequestDto {
-    private int capacity;
+    private Integer capacity;
     private String description;
 
-    public int getCapacity() {
+    public Integer getCapacity() {
         return capacity;
     }
 
-    public void setCapacity(int capacity) {
+    public void setCapacity(Integer capacity) {
         this.capacity = capacity;
     }
 
