@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        logger.info("Trying to user by email: " + email);
+        logger.info("Trying to get user by email: " + email);
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("from User where email = :email", User.class)
                     .setParameter("email", email)

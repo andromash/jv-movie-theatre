@@ -22,16 +22,17 @@ public class MovieSessionMapper {
         this.cinemaHallService = cinemaHallService;
     }
 
-    public MovieSession castDtoToMovieSession(MovieSessionRequestDto movieSessionDto) {
+    public MovieSession mapDtoToMovieSession(MovieSessionRequestDto movieSessionDto) {
         MovieSession movieSession = new MovieSession();
         movieSession.setShowTime(LocalDateTime.parse(movieSessionDto.getShowTime(),
                 DateTimeFormatter.ofPattern(DATETIME_PATTERN)));
         movieSession.setMovie(movieService.getById(movieSessionDto.getMovieId()));
         movieSession.setCinemaHall(cinemaHallService.getById(movieSessionDto.getCinemaHallId()));
+        movieSession.setId(movieSessionDto.getId());
         return movieSession;
     }
 
-    public MovieSessionResponseDto castMovieSessionToDto(MovieSession movieSession) {
+    public MovieSessionResponseDto mapMovieSessionToDto(MovieSession movieSession) {
         MovieSessionResponseDto movieSessionResponseDto = new MovieSessionResponseDto();
         movieSessionResponseDto.setCinemaHall(movieSession.getCinemaHall().getId());
         movieSessionResponseDto.setMovie(movieSession.getMovie().getId());
