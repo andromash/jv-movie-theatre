@@ -6,7 +6,6 @@ import com.hibernate.cinema.service.AuthenticationService;
 import com.hibernate.cinema.service.ShoppingCartService;
 import com.hibernate.cinema.service.UserService;
 import com.hibernate.cinema.util.HashUtil;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
