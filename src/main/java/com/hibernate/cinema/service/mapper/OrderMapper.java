@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderMapper {
 
-    public OrderResponseDto castOrderToDto(Order order) {
+    public OrderResponseDto mapOrderToDto(Order order) {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(order.getId());
         orderResponseDto.setOrderDate(order.getOrderDate());

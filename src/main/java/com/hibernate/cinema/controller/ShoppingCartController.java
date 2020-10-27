@@ -37,7 +37,7 @@ public class ShoppingCartController {
     @PostMapping("/movie-sessions")
     public void addMovieSession(@RequestParam String userEmail,
                                 @RequestBody MovieSessionRequestDto movieSession) {
-        shoppingCartService.addSession(movieSessionMapper.castDtoToMovieSession(movieSession),
+        shoppingCartService.addSession(movieSessionMapper.mapDtoToMovieSession(movieSession),
                 userService.findByEmail(userEmail));
     }
 }
