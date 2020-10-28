@@ -2,16 +2,15 @@ package com.hibernate.cinema.model.dto;
 
 import com.hibernate.cinema.validator.EmailConstraint;
 import com.hibernate.cinema.validator.PasswordsValueMatch;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-@PasswordsValueMatch(field = "password",
-        fieldMatch = "passwordRepeated")
+@PasswordsValueMatch
 public class UserRequestDto {
     @EmailConstraint
     private String email;
     @NotNull
-    @Min(4)
+    @Size(min = 4)
     private String password;
     @NotNull
     private String passwordRepeated;
