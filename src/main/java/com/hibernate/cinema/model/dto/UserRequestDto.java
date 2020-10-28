@@ -1,7 +1,6 @@
 package com.hibernate.cinema.model.dto;
 
 import com.hibernate.cinema.validator.EmailConstraint;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -11,7 +10,7 @@ public class UserRequestDto {
     @NotNull
     @Min(4)
     private String password;
-
+    @NotNull
     private String passwordRepeated;
 
     public String getEmail() {
