@@ -21,19 +21,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public User register(String email, String password, String passwordRepeated) {
-        if (isRepeatedPasswordWrong(password, passwordRepeated)) {
-            throw new RuntimeException("Your password and repeated password don't match");
-        }
+    public User register(String email, String password) {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user = userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
         return user;
-    }
-
-    private boolean isRepeatedPasswordWrong(String password, String passwordRepeated) {
-        return !password.equals(passwordRepeated);
     }
 }

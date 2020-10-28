@@ -1,9 +1,8 @@
 package com.hibernate.cinema.validator;
 
-import org.springframework.beans.BeanWrapperImpl;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import org.springframework.beans.BeanWrapperImpl;
 
 public class PasswordsValueMatchValidator
         implements ConstraintValidator<PasswordsValueMatch, Object> {
