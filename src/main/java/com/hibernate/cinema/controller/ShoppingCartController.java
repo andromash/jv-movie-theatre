@@ -31,14 +31,13 @@ public class ShoppingCartController {
 
     @GetMapping("/by-user")
     public ShoppingCart getByUser(Authentication user) {
-        return shoppingCartService.getByUser(userService.findByEmail(user.getName()));
+        return shoppingCartService.getByUser(userService.findByEmail(user));
     }
 
     @PostMapping("/movie-sessions")
     public void addMovieSession(Authentication user,
                                 @RequestBody MovieSessionRequestDto movieSession) {
-        String userEmail = user.getName();
         shoppingCartService.addSession(movieSessionMapper.mapDtoToMovieSession(movieSession),
-                userService.findByEmail(userEmail));
+                userService.findByEmail(user));
     }
 }
