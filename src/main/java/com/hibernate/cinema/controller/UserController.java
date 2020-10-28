@@ -4,6 +4,7 @@ import com.hibernate.cinema.model.dto.UserResponseDto;
 import com.hibernate.cinema.service.UserService;
 import com.hibernate.cinema.service.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/by-email")
-    public UserResponseDto getUserByEmail(@RequestParam String email) {
-        return userMapper.mapUserToDto(userService.findByEmail(email));
+    public UserResponseDto getUserByEmail(Authentication user) {
+        return userMapper.mapUserToDto(userService.findByEmail(user.getName()));
     }
 }

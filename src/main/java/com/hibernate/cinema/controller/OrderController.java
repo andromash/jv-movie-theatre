@@ -9,6 +9,7 @@ import com.hibernate.cinema.service.mapper.OrderMapper;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,8 @@ public class OrderController {
     }
 
     @PostMapping("/complete")
-    public void completeOrder(@RequestParam String email) {
+    public void completeOrder(Authentication user) {
+        String email = user.getName();
         ShoppingCart shoppingCart = shoppingCartService
                 .getByUser(userService.findByEmail(email));
         orderService.completeOrder(shoppingCart.getTickets(), shoppingCart.getUser());
