@@ -1,6 +1,5 @@
 package com.hibernate.cinema.service.impl;
 
-import com.hibernate.cinema.exception.AuthenticationException;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.AuthenticationService;
 import com.hibernate.cinema.service.ShoppingCartService;
