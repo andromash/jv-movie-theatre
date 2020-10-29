@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(Authentication authentication) {
+    public User findUser(Authentication authentication) {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         return userDao.findByEmail(userDetails.getUsername()).get();
     }

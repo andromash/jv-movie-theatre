@@ -8,5 +8,5 @@ public interface UserService {
 
     User findByEmail(String email);
 
-    User findByEmail(Authentication authentication);
+    User findUser(Authentication authentication);
 }
