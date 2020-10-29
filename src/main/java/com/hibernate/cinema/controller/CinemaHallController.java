@@ -6,6 +6,7 @@ import com.hibernate.cinema.service.CinemaHallService;
 import com.hibernate.cinema.service.mapper.CinemaHallMapper;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ public class CinemaHallController {
     }
 
     @PostMapping
-    public void addCinemaHall(@RequestBody CinemaHallRequestDto cinemaHall) {
+    public void addCinemaHall(@RequestBody @Valid CinemaHallRequestDto cinemaHall) {
         cinemaHallService.add(cinemaHallMapper.mapDtoToCinemaHall(cinemaHall));
     }
 

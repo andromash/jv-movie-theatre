@@ -1,6 +1,9 @@
 package com.hibernate.cinema.model.dto;
 
+import javax.validation.constraints.NotNull;
+
 public class CinemaHallRequestDto {
+    @NotNull
     private Integer capacity;
     private String description;
 

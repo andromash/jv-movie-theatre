@@ -3,24 +3,24 @@ package com.hibernate.cinema.service.impl;
 import com.hibernate.cinema.dao.UserDao;
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.UserService;
-import com.hibernate.cinema.util.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder encoder) {
         this.userDao = userDao;
+        this.encoder = encoder;
     }
 
     @Override
     public User add(User user) {
-        user.setSalt(HashUtil.getSalt());
-        String hashedPassword = HashUtil.hashPassword(user.getPassword(), user.getSalt());
-        user.setPassword(hashedPassword);
+        user.setPassword(encoder.encode(user.getPassword()));
         return userDao.add(user);
     }
 
