@@ -11,6 +11,6 @@ public class PasswordsValueMatchValidator
     public boolean isValid(UserRequestDto value, ConstraintValidatorContext context) {
         String fieldValue = value.getPassword();
         String fieldMatchValue = value.getPasswordRepeated();
-        return fieldValue.equals(fieldMatchValue);
+        return fieldValue != null && fieldValue.equals(fieldMatchValue);
     }
 }
