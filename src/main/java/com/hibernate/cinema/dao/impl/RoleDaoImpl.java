@@ -45,6 +45,9 @@ public class RoleDaoImpl implements RoleDao {
 
     @Override
     public Role getRoleByName(String roleName) {
-        return null;
+        logger.info("Trying to get role by name " + roleName);
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(Role.class, roleName);
+        }
     }
 }
