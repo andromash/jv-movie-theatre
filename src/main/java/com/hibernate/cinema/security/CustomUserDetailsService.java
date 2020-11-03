@@ -7,18 +7,15 @@ import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserService userService;
-    private final PasswordEncoder encoder;
 
     @Autowired
-    public CustomUserDetailsService(UserService userService, PasswordEncoder encoder) {
+    public CustomUserDetailsService(UserService userService) {
         this.userService = userService;
-        this.encoder = encoder;
     }
 
     @Override

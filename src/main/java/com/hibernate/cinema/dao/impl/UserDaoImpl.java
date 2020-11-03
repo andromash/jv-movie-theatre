@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.persist(user);
+            session.save(user);
             transaction.commit();
             logger.info("User successfully created: " + user);
             return user;
