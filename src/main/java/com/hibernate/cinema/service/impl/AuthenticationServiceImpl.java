@@ -2,21 +2,26 @@ package com.hibernate.cinema.service.impl;
 
 import com.hibernate.cinema.model.User;
 import com.hibernate.cinema.service.AuthenticationService;
+import com.hibernate.cinema.service.RoleService;
 import com.hibernate.cinema.service.ShoppingCartService;
 import com.hibernate.cinema.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final ShoppingCartService shoppingCartService;
+    private final RoleService roleService;
 
     @Autowired
     public AuthenticationServiceImpl(UserService userService,
-                                     ShoppingCartService shoppingCartService) {
+                                     ShoppingCartService shoppingCartService, RoleService roleService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
+        this.roleService = roleService;
     }
 
     @Override
@@ -24,6 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
+        user.setRoles(Set.of(roleService.getRoleByName("USER")));
         user = userService.add(user);
         shoppingCartService.registerNewShoppingCart(user);
         return user;
