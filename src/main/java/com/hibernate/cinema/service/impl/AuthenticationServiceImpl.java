@@ -5,10 +5,9 @@ import com.hibernate.cinema.service.AuthenticationService;
 import com.hibernate.cinema.service.RoleService;
 import com.hibernate.cinema.service.ShoppingCartService;
 import com.hibernate.cinema.service.UserService;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Set;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -18,7 +17,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Autowired
     public AuthenticationServiceImpl(UserService userService,
-                                     ShoppingCartService shoppingCartService, RoleService roleService) {
+                                     ShoppingCartService shoppingCartService,
+                                     RoleService roleService) {
         this.userService = userService;
         this.shoppingCartService = shoppingCartService;
         this.roleService = roleService;
