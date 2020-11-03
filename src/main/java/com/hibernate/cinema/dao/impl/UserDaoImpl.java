@@ -29,7 +29,7 @@ public class UserDaoImpl implements UserDao {
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(user);
+            session.persist(user);
             transaction.commit();
             logger.info("User successfully created: " + user);
             return user;
@@ -49,7 +49,8 @@ public class UserDaoImpl implements UserDao {
     public Optional<User> findByEmail(String email) {
         logger.info("Trying to get user by email: " + email);
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from User where email = :email", User.class)
+            return session.createQuery("from User u JOIN FETCH u.roles "
+                    + "where  u.email = :email", User.class)
                     .setParameter("email", email)
                     .uniqueResultOptional();
         } catch (Exception e) {

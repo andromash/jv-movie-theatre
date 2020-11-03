@@ -1,5 +1,6 @@
 package com.hibernate.cinema.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,7 +19,7 @@ public class User {
     @Column(unique = true)
     private String email;
     private String password;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Role> roles;
 
     public Long getId() {
