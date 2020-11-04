@@ -28,11 +28,11 @@ public class InjectData {
         User admin = new User();
         admin.setEmail("admin@gmail.com");
         admin.setPassword("12345");
-        admin.setRoles(Set.of(Role.of(ADMIN)));
+        admin.setRoles(Set.of(roleService.getRoleByName(ADMIN)));
         User user = new User();
         user.setEmail("user@gmail.com");
         user.setPassword("1111");
-        user.setRoles(Set.of(Role.of(USER)));
+        user.setRoles(Set.of(roleService.getRoleByName(USER)));
 
         userService.add(admin);
         userService.add(user);
