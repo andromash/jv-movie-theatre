@@ -1,9 +1,8 @@
 package com.hibernate.cinema.dao.impl;
 
-import com.hibernate.cinema.dao.UserDao;
+import com.hibernate.cinema.dao.RoleDao;
 import com.hibernate.cinema.exception.DataProcessingException;
-import com.hibernate.cinema.model.User;
-import java.util.Optional;
+import com.hibernate.cinema.model.Role;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,32 +11,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserDaoImpl implements UserDao {
-    private static final Logger logger = Logger.getLogger(UserDaoImpl.class);
+public class RoleDaoImpl implements RoleDao {
+    private static final Logger logger = Logger.getLogger(RoleDaoImpl.class);
     private final SessionFactory sessionFactory;
 
     @Autowired
-    public UserDaoImpl(SessionFactory sessionFactory) {
+    public RoleDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
-    public User add(User user) {
-        logger.info("Trying to add new user");
+    public void add(Role role) {
+        logger.info("Trying to add new role");
         Transaction transaction = null;
         Session session = null;
         try {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.save(user);
+            session.save(role);
             transaction.commit();
-            logger.info("User successfully created: " + user);
-            return user;
+            logger.info("Role successfully created: " + role);
         } catch (Exception e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add user " + user + "to database :", e);
+            throw new DataProcessingException("Can't add role " + role + "to database :", e);
         } finally {
             if (session != null) {
                 session.close();
@@ -46,15 +44,12 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        logger.info("Trying to get user by email: " + email);
+    public Role getRoleByName(String roleName) {
+        logger.info("Trying to get role by name " + roleName);
         try (Session session = sessionFactory.openSession()) {
-            return session.createQuery("from User u JOIN FETCH u.roles "
-                    + "where  u.email = :email", User.class)
-                    .setParameter("email", email)
-                    .uniqueResultOptional();
-        } catch (Exception e) {
-            throw new DataProcessingException("Couldn't get user with email: " + email, e);
+            return session.createQuery("from Role where roleName = :name", Role.class)
+                    .setParameter("name", Role.RoleName.valueOf(roleName))
+                    .getSingleResult();
         }
     }
 }
